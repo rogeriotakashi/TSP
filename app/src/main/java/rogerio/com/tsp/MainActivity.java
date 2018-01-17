@@ -6,14 +6,19 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import rogerio.com.tsp.Graph.Drawer;
 import rogerio.com.tsp.Graph.Location;
+import rogerio.com.tsp.Graph.Route;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Location> locationList;
     private int idCounter;
 
+    //Buttons
+    private Button btnRandom;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +46,29 @@ public class MainActivity extends AppCompatActivity {
         idCounter = 0;
 
         imageView = (ImageView) findViewById(R.id.imageView);
+        btnRandom = (Button) findViewById(R.id.btnRandom);
+
+        btnRandom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Route
+                Route route = new Route(locationList);
+
+                paint = new Paint();
+                paint.setColor(Color.BLACK);
+                Drawer drawer = new Drawer(canvas,paint);
+                drawer.drawRoute(route);
+
+            }
+        });
 
     }
+
+
+
+
+
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -55,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 switch (motionEvent.getAction()){
                     case MotionEvent.ACTION_DOWN:
-                        locationList.add(new Location(idCounter++,(int)motionEvent.getX(),(int)motionEvent.getY()));
+                        locationList.add(new Location(idCounter++,(double)motionEvent.getX(),(double)motionEvent.getY()));
                         canvas.drawCircle((int)motionEvent.getX(),(int)motionEvent.getY(),10,paint);
                         imageView.setImageBitmap(bitmap);
                         break;

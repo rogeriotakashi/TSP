@@ -6,20 +6,29 @@ package rogerio.com.tsp.Graph;
 
 public class Location extends Vertex {
 
-    private int x;
-    private int y;
+    private double x;
+    private double y;
 
-    public Location(int id,int x, int y) {
+    public Location(int id,double x, double y) {
         this.id = id;
         this.x = x;
         this.y = y;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
+    }
+
+    public float distance(Location other){
+        double x = this.x - other.getX();
+        double y = this.y - other.getY();
+        x = x * x;
+        y = y * y;
+
+        return Math.round(Math.sqrt(x+y));
     }
 }

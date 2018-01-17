@@ -8,11 +8,24 @@ import java.util.ArrayList;
 
 public class Route {
 
-    LocationSequence route;
+    ArrayList<Location> route;
 
+    public Route(ArrayList<Location> route) {
+        this.route = route;
+    }
 
     public long cost(){
         //TODO
         return 0;
     }
+
+    public ArrayList<Location> getRoute(){
+        return route;
+    }
+
+    public Location getLocation(int i){
+        return route.get(i);
+    }
+
+
 }
