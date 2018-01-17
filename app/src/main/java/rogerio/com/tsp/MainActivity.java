@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
                 //Route
                 Route route = new Route(locationList);
-
+                route.getRandomRoute();
 
                 paint = new Paint();
                 paint.setColor(Color.BLACK);

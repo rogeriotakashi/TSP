@@ -1,6 +1,9 @@
 package rogerio.com.tsp.Graph;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Random;
 
 /**
  * Created by ROGERIO on 17/01/2018.
@@ -21,7 +24,6 @@ public class Route {
             totalCost += route.get(i).distance(route.get((i+1) % route.size()));
         }
 
-
         return totalCost;
     }
 
@@ -31,6 +33,10 @@ public class Route {
 
     public Location getLocation(int i){
         return route.get(i);
+    }
+
+    public void getRandomRoute(){
+        Collections.shuffle(route);
     }
 
 

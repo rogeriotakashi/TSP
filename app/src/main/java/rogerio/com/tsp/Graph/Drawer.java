@@ -26,9 +26,13 @@ public class Drawer {
                 paint);
     }
 
+    public void drawLocation(Location location){
+        canvas.drawCircle((float) location.getX(),(float)location.getY(),10,paint);
+    }
+
     public void drawRoute(Route route){
         for(int i = 0; i < route.getRoute().size() ; i++){
-            canvas.drawCircle((float) route.getLocation(i).getX(),(float)route.getLocation(i).getY(),10,paint);
+            drawLocation(route.getLocation(i));
             drawLine(route.getLocation(i),route.getLocation((i+1) % route.getRoute().size()));
         }
     }
