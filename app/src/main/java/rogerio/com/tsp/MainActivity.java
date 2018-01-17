@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     //Buttons
     private Button btnRandom;
 
+    //TextView
+    private TextView txtDistance;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +52,22 @@ public class MainActivity extends AppCompatActivity {
 
         imageView = (ImageView) findViewById(R.id.imageView);
         btnRandom = (Button) findViewById(R.id.btnRandom);
+        txtDistance = (TextView) findViewById(R.id.txtDistance);
 
         btnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
                 //Route
                 Route route = new Route(locationList);
+
 
                 paint = new Paint();
                 paint.setColor(Color.BLACK);
                 Drawer drawer = new Drawer(canvas,paint);
                 drawer.drawRoute(route);
+
+                txtDistance.setText(route.cost()+"");
 
             }
         });

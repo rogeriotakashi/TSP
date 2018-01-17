@@ -14,9 +14,15 @@ public class Route {
         this.route = route;
     }
 
-    public long cost(){
-        //TODO
-        return 0;
+    public double cost(){
+        double totalCost = 0.0;
+
+        for(int i = 0; i < route.size() ; i++){
+            totalCost += route.get(i).distance(route.get((i+1) % route.size()));
+        }
+
+
+        return totalCost;
     }
 
     public ArrayList<Location> getRoute(){

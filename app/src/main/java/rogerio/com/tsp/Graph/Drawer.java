@@ -28,6 +28,7 @@ public class Drawer {
 
     public void drawRoute(Route route){
         for(int i = 0; i < route.getRoute().size() ; i++){
+            canvas.drawCircle((float) route.getLocation(i).getX(),(float)route.getLocation(i).getY(),10,paint);
             drawLine(route.getLocation(i),route.getLocation((i+1) % route.getRoute().size()));
         }
     }
