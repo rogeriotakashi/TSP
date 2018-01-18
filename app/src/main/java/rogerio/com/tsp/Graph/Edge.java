@@ -5,19 +5,17 @@ package rogerio.com.tsp.Graph;
  */
 
 public class Edge {
-    private int id;
     private Location start;
     private Location end;
-    private long weight;
+    private double weight;
 
-    public Edge(int id, Location start, Location end) {
-        this.id = id;
+    public Edge(Location start, Location end) {
         this.start = start;
         this.end = end;
+        this.weight = start.distance(end);
     }
 
-
-
-
-
+    public double getWeight() {
+        return weight;
+    }
 }

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import rogerio.com.tsp.Graph.Drawer;
 import rogerio.com.tsp.Graph.Location;
 import rogerio.com.tsp.Graph.Route;
+import rogerio.com.tsp.Optimize.NearestNeighbourSearch;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Buttons
     private Button btnRandom;
+    private Button btnOptimize;
 
     //TextView
     private TextView txtDistance;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         imageView = (ImageView) findViewById(R.id.imageView);
         btnRandom = (Button) findViewById(R.id.btnRandom);
+        btnOptimize = (Button) findViewById(R.id.btnOptimize);
         txtDistance = (TextView) findViewById(R.id.txtDistance);
 
         btnRandom.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +72,23 @@ public class MainActivity extends AppCompatActivity {
 
                 txtDistance.setText(route.cost()+"");
 
+            }
+        });
+
+        btnOptimize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+
+                NearestNeighbourSearch optimizer = new NearestNeighbourSearch();
+                Route nearestNeighbourRoute = optimizer.optimize(locationList);
+
+                paint = new Paint();
+                paint.setColor(Color.BLACK);
+                Drawer drawer = new Drawer(canvas,paint);
+                drawer.drawRoute(nearestNeighbourRoute);
+
+                txtDistance.setText(nearestNeighbourRoute.cost()+"");
             }
         });
 
@@ -95,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (motionEvent.getAction()){
                     case MotionEvent.ACTION_DOWN:
                         locationList.add(new Location(idCounter++,(double)motionEvent.getX(),(double)motionEvent.getY()));
-                        canvas.drawCircle((int)motionEvent.getX(),(int)motionEvent.getY(),10,paint);
+                        canvas.drawCircle((int)motionEvent.getX(),(int)motionEvent.getY(),5,paint);
                         imageView.setImageBitmap(bitmap);
                         break;
 
