@@ -56,20 +56,17 @@ public class MainActivity extends AppCompatActivity {
         btnRandom = (Button) findViewById(R.id.btnRandom);
         btnOptimize = (Button) findViewById(R.id.btnOptimize);
         txtDistance = (TextView) findViewById(R.id.txtDistance);
+        paint = new Paint();
+        paint.setColor(Color.BLACK);
 
         btnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-                //Route
+
                 Route route = new Route(locationList);
                 route.getRandomRoute();
-
-                paint = new Paint();
-                paint.setColor(Color.BLACK);
-                Drawer drawer = new Drawer(canvas,paint);
-                drawer.drawRoute(route);
-
+                draw(canvas,paint,route);
                 txtDistance.setText(route.cost()+"");
 
             }
@@ -82,16 +79,16 @@ public class MainActivity extends AppCompatActivity {
 
                 NearestNeighbourSearch optimizer = new NearestNeighbourSearch();
                 Route nearestNeighbourRoute = optimizer.optimize(locationList);
-
-                paint = new Paint();
-                paint.setColor(Color.BLACK);
-                Drawer drawer = new Drawer(canvas,paint);
-                drawer.drawRoute(nearestNeighbourRoute);
-
+                draw(canvas,paint,nearestNeighbourRoute);
                 txtDistance.setText(nearestNeighbourRoute.cost()+"");
             }
         });
 
+    }
+
+    public void draw(Canvas canvas,Paint paint,Route route){
+        Drawer drawer = new Drawer(canvas,paint);
+        drawer.drawRoute(route);
     }
 
 

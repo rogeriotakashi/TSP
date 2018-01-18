@@ -27,12 +27,10 @@ public class NearestNeighbourSearch {
         while (visitedVertices.size() < locations.size()) {
             int nextNode;
             nextNode = findNearestNeightbour(actualNode,locations,visitedVertices);
-            Log.e("NextNode","--->"+nextNode);
             visitedVertices.add(nextNode);
             generatedRoute.add(locations.get(nextNode));
 
             actualNode = nextNode;
-            Log.e("loop","aqui");
         }
 
         generatedRoute.add(locations.get(actualNode));
@@ -52,7 +50,6 @@ public class NearestNeighbourSearch {
                 if(tempEdge.getWeight() < nearestDist){
                     nearestNode = i;
                     nearestDist = tempEdge.getWeight();
-                    Log.e("loop","aqui"+tempEdge.getWeight() + " "+  nearestDist);
                 }
             }
         }
