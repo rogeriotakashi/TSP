@@ -7,20 +7,18 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import rogerio.com.tsp.Graph.Drawer;
 import rogerio.com.tsp.Graph.Location;
 import rogerio.com.tsp.Graph.Route;
-import rogerio.com.tsp.Optimize.NearestNeighbourSearch;
+import rogerio.com.tsp.Optimize.NearestNeighbourSearchAsyncTask;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Canvas canvas;
     private ImageView imageView;
     private Paint paint;
-
+    private Drawer drawer;
 
     //Structure
     private ArrayList<Location> locationList;
@@ -59,14 +57,14 @@ public class MainActivity extends AppCompatActivity {
         paint = new Paint();
         paint.setColor(Color.BLACK);
 
+
         btnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-
                 Route route = new Route(locationList);
                 route.getRandomRoute();
-                draw(canvas,paint,route);
+                drawer.drawRoute(route);
                 txtDistance.setText(route.cost()+"");
 
             }
@@ -76,20 +74,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-
-                NearestNeighbourSearch optimizer = new NearestNeighbourSearch();
-                Route nearestNeighbourRoute = optimizer.optimize(locationList);
-                draw(canvas,paint,nearestNeighbourRoute);
-                txtDistance.setText(nearestNeighbourRoute.cost()+"");
+                NearestNeighbourSearchAsyncTask optimizer = new NearestNeighbourSearchAsyncTask(MainActivity.this,txtDistance,drawer);
+                optimizer.execute(locationList);
             }
         });
 
     }
 
-    public void draw(Canvas canvas,Paint paint,Route route){
-        Drawer drawer = new Drawer(canvas,paint);
-        drawer.drawRoute(route);
-    }
+
 
 
 
@@ -105,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         canvas = new Canvas(bitmap);
         paint = new Paint();
         paint.setColor(Color.BLACK);
-
+        drawer = new Drawer(canvas,paint);
         imageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {

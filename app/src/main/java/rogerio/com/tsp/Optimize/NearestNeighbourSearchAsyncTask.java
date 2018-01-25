@@ -1,23 +1,53 @@
 package rogerio.com.tsp.Optimize;
 
-import android.util.Log;
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.os.AsyncTask;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import rogerio.com.tsp.Graph.Drawer;
 import rogerio.com.tsp.Graph.Edge;
 import rogerio.com.tsp.Graph.Location;
 import rogerio.com.tsp.Graph.Route;
+
+
 
 /**
  * Created by ROGERIO on 18/01/2018.
  */
 
-public class NearestNeighbourSearch {
+public class NearestNeighbourSearchAsyncTask extends AsyncTask < ArrayList<Location>, Route, Route> {
+
+    private Context context;
+    private TextView txtDistance;
+    private Drawer drawer;
 
 
+    public NearestNeighbourSearchAsyncTask(Context context,TextView txtDistance,Drawer drawer) {
+        this.context = context;
+        this.txtDistance = txtDistance;
+        this.drawer = drawer;
+    }
 
-    public Route optimize(ArrayList<Location> locations){
+    @Override
+    protected Route doInBackground(ArrayList<Location>... arrayLists) {
+        Route nearestNeighbourRoute = optimize(arrayLists[0]);
+
+        return nearestNeighbourRoute;
+    }
+
+    @Override
+    protected void onPostExecute(Route route){
+        drawer.drawRoute(route);
+        txtDistance.setText(route.cost()+"");
+    }
+
+
+    private Route optimize(ArrayList<Location> locations){
         ArrayList<Location> generatedRoute = new ArrayList<>();
         HashSet<Integer> visitedVertices = new HashSet<>();
         int actualNode = 0;
@@ -56,5 +86,8 @@ public class NearestNeighbourSearch {
 
         return nearestNode;
     }
+
+
+
 
 }
