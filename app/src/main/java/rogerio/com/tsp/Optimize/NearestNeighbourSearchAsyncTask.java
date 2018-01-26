@@ -20,7 +20,7 @@ import rogerio.com.tsp.Graph.Route;
  * Created by ROGERIO on 18/01/2018.
  */
 
-public class NearestNeighbourSearchAsyncTask extends AsyncTask < ArrayList<Location>, Route, Route> {
+public class NearestNeighbourSearchAsyncTask extends AsyncTask < ArrayList<Location>, ArrayList<Location>, Route> {
 
     private Context context;
     private TextView txtDistance;
@@ -35,10 +35,30 @@ public class NearestNeighbourSearchAsyncTask extends AsyncTask < ArrayList<Locat
 
     @Override
     protected Route doInBackground(ArrayList<Location>... arrayLists) {
-        Route nearestNeighbourRoute = optimize(arrayLists[0]);
+        ArrayList<Location> generatedRoute = new ArrayList<>();
+        HashSet<Integer> visitedVertices = new HashSet<>();
+        int actualNode = 0;
+        visitedVertices.add(actualNode);
+        generatedRoute.add(arrayLists[0].get(0));
+
+        while (visitedVertices.size() < arrayLists[0].size()) {
+            int nextNode;
+            nextNode = findNearestNeightbour(actualNode,arrayLists[0],visitedVertices);
+            visitedVertices.add(nextNode);
+            generatedRoute.add(arrayLists[0].get(nextNode));
+
+            actualNode = nextNode;
+        }
+
+        generatedRoute.add(arrayLists[0].get(actualNode));
+
+        Route nearestNeighbourRoute = new Route(generatedRoute);
+
 
         return nearestNeighbourRoute;
     }
+
+
 
     @Override
     protected void onPostExecute(Route route){
@@ -46,29 +66,6 @@ public class NearestNeighbourSearchAsyncTask extends AsyncTask < ArrayList<Locat
         txtDistance.setText(route.cost()+"");
     }
 
-
-    private Route optimize(ArrayList<Location> locations){
-        ArrayList<Location> generatedRoute = new ArrayList<>();
-        HashSet<Integer> visitedVertices = new HashSet<>();
-        int actualNode = 0;
-        visitedVertices.add(actualNode);
-        generatedRoute.add(locations.get(0));
-
-        while (visitedVertices.size() < locations.size()) {
-            int nextNode;
-            nextNode = findNearestNeightbour(actualNode,locations,visitedVertices);
-            visitedVertices.add(nextNode);
-            generatedRoute.add(locations.get(nextNode));
-
-            actualNode = nextNode;
-        }
-
-        generatedRoute.add(locations.get(actualNode));
-        Route nearestNeighbourRoute = new Route(generatedRoute);
-
-        return nearestNeighbourRoute;
-
-    }
 
     private int findNearestNeightbour(int actualNode, ArrayList<Location> locations,HashSet<Integer> visitedVertices ){
         int nearestNode = 0;

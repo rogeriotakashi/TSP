@@ -1,6 +1,7 @@
 package rogerio.com.tsp.Graph;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
@@ -39,5 +40,15 @@ public class Route {
         Collections.shuffle(route);
     }
 
+    @Override
+    public String toString() {
+        String result = "";
 
+        for(Location location : route){
+            result += " "+location.id;
+        }
+
+        return result;
+
+    }
 }

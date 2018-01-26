@@ -3,6 +3,8 @@ package rogerio.com.tsp.Graph;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import java.util.ArrayList;
+
 /**
  * Created by ROGERIO on 17/01/2018.
  */
@@ -36,5 +38,12 @@ public class Drawer {
             drawLine(route.getLocation(i),route.getLocation((i+1) % route.getRoute().size()));
         }
     }
+
+
+
+
+
+
+
 
 }
