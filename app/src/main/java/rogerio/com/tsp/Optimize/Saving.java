@@ -4,7 +4,7 @@ package rogerio.com.tsp.Optimize;
  * Created by ROGERIO on 26/01/2018.
  */
 
-public class Saving {
+public class Saving implements Comparable <Saving> {
 
     private int i;
     private int j;
@@ -47,5 +47,11 @@ public class Saving {
                 ", j=" + j +
                 ", saving=" + saving +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(Saving otherSaving) {
+        return Double.compare(this.saving, otherSaving.getSaving());
     }
 }
