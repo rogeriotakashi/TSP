@@ -1,4 +1,4 @@
-package rogerio.com.tsp.Optimize;
+package rogerio.com.tsp.SavingsHeuristic;
 
 import android.util.Log;
 
@@ -62,11 +62,34 @@ public class SavingsHeuristic {
         }
     }
 
+    public Route mergeRoutes(Route A, Route B){
+        Log.e("Route A:",A.toString());
+        Log.e("Route B:",B.toString());
+        ArrayList<Location> mergedLocations = new ArrayList<>();
 
+        for(Location location : A.getRoute()){
+            mergedLocations.add(location);
+        }
+
+        for(int i = 1; i < B.getRoute().size(); i++){
+            mergedLocations.add(B.getLocation(i));
+        }
+
+        Route mergedRoute = new Route(mergedLocations);
+
+        return mergedRoute;
+    }
+
+
+    //Not Finished!
     public void optimize(){
+
+        Route mergedRoute;
+
 
         //Make n routes: v0 → vi → v0, for each i ≥ 1;
         createSavingRoutes();
+
 
         //Compute the savings for merging delivery locations i and j, which is given by sij = di0 + d0j − dij , for all i, j ≥ 1 and i 6= j;
         computeSavings();
@@ -76,15 +99,18 @@ public class SavingsHeuristic {
         Collections.sort(savingList,Collections.reverseOrder());
         printSavings();
 
-        // Starting at the top of the (remaining) list of savings, merge the two routes associated with the largest (remaining) savings, provided that:
-        //(a) The two delivery locations are not already on the same route;
-        //(b) Neither delivery location is interior to its route, meaning that both notes are still
-        //directly connected to the depot on their respective routes;
-        //(c) The demand G and distance constraints D are not violated by the merged route.
+
+        do {
+            mergedRoute = mergeRoutes(
+                    savingsRoutes.get(savingList.get(0).getI() - 1),
+                    savingsRoutes.get(savingList.get(0).getJ() - 1));
 
 
+            savingList.remove(savingList.get(0));
 
+            Log.e("Merged Route:", mergedRoute.toString());
 
+        }while(!savingList.isEmpty());
         //Repeat step (3) until no additional savings can be achieved.
 
     }

@@ -1,4 +1,4 @@
-package rogerio.com.tsp.Optimize;
+package rogerio.com.tsp.SavingsHeuristic;
 
 /**
  * Created by ROGERIO on 26/01/2018.
