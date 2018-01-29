@@ -19,6 +19,7 @@ import rogerio.com.tsp.Graph.Drawer;
 import rogerio.com.tsp.Graph.Location;
 import rogerio.com.tsp.Graph.Route;
 import rogerio.com.tsp.Optimize.NearestNeighbourSearchAsyncTask;
+import rogerio.com.tsp.Optimize.SimulatedAnnealing;
 import rogerio.com.tsp.SavingsHeuristic.SavingsHeuristic;
 
 
@@ -75,9 +76,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+                /*
                 NearestNeighbourSearchAsyncTask optimizer = new NearestNeighbourSearchAsyncTask(MainActivity.this,txtDistance,drawer);
                 optimizer.execute(locationList);
-
+                */
+                Route randomRoute = new Route(locationList);
+                randomRoute.getRandomRoute();
+                SimulatedAnnealing optimizer = new SimulatedAnnealing();
+                optimizer.optimize(randomRoute);
 
             }
         });
