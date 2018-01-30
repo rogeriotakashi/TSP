@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     //Buttons
     private Button btnRandom;
     private Button btnOptimize;
+    private Button btnNearest;
 
     //TextView
     private TextView txtDistance;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
         btnRandom = (Button) findViewById(R.id.btnRandom);
         btnOptimize = (Button) findViewById(R.id.btnOptimize);
+        btnNearest = (Button) findViewById(R.id.btnNearest);
         txtDistance = (TextView) findViewById(R.id.txtDistance);
         paint = new Paint();
         paint.setColor(Color.BLACK);
@@ -85,6 +87,15 @@ public class MainActivity extends AppCompatActivity {
                 Route optimizedRoute = optimizer.optimize();
                 drawer.drawRoute(optimizedRoute);
                 txtDistance.setText(optimizedRoute.cost()+"");
+            }
+        });
+
+        btnNearest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+                NearestNeighbourSearchAsyncTask optimizer = new NearestNeighbourSearchAsyncTask(MainActivity.this,txtDistance,drawer);
+                optimizer.execute(locationList);
             }
         });
 

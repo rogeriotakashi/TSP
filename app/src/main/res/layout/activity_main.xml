@@ -32,15 +32,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <Button
-        android:text="Random"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_toLeftOf="@+id/btnOptimize"
-        android:layout_toStartOf="@+id/btnOptimize"
-        android:id="@+id/btnRandom" />
-
     <TextView
         android:text="Total Distance:"
         android:layout_width="wrap_content"
@@ -58,4 +49,23 @@
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Nearest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnNearest"
+        android:layout_alignBaseline="@+id/txtDistance"
+        android:layout_alignBottom="@+id/txtDistance"
+        android:layout_toLeftOf="@+id/btnOptimize"
+        android:layout_toStartOf="@+id/btnOptimize" />
+
+    <Button
+        android:text="Random"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnRandom"
+        android:layout_alignBaseline="@+id/btnNearest"
+        android:layout_alignBottom="@+id/btnNearest"
+        android:layout_toRightOf="@+id/textView" />
 </RelativeLayout>

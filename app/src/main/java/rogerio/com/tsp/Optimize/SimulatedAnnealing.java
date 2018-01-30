@@ -78,7 +78,7 @@ public class SimulatedAnnealing {
             return 1.0;
 
         //else calculate the probability
-        return 0;
+        return Math.exp((bestSolution - actualSolution)/temperature);
     }
 
     public void swap(Route route){
