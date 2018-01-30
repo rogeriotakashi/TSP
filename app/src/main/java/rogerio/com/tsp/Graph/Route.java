@@ -14,8 +14,19 @@ public class Route {
 
     ArrayList<Location> route;
 
+    public Route() {
+    }
+
     public Route(ArrayList<Location> route) {
         this.route = route;
+    }
+
+    public Route (Route route){
+        this.route = new ArrayList<>();
+
+        for(Location location : route.getRoute())
+            this.route.add(location);
+
     }
 
     public double cost(){
@@ -30,6 +41,10 @@ public class Route {
 
     public ArrayList<Location> getRoute(){
         return route;
+    }
+
+    public void setRoute(int i, Location location) {
+        this.route.set(i,location);
     }
 
     public Location getLocation(int i){

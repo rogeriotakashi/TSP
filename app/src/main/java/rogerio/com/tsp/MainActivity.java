@@ -80,11 +80,11 @@ public class MainActivity extends AppCompatActivity {
                 NearestNeighbourSearchAsyncTask optimizer = new NearestNeighbourSearchAsyncTask(MainActivity.this,txtDistance,drawer);
                 optimizer.execute(locationList);
                 */
-                Route randomRoute = new Route(locationList);
-                randomRoute.getRandomRoute();
-                SimulatedAnnealing optimizer = new SimulatedAnnealing();
-                optimizer.optimize(randomRoute);
 
+                SimulatedAnnealing optimizer = new SimulatedAnnealing(locationList);
+                Route optimizedRoute = optimizer.optimize();
+                drawer.drawRoute(optimizedRoute);
+                txtDistance.setText(optimizedRoute.cost()+"");
             }
         });
 
