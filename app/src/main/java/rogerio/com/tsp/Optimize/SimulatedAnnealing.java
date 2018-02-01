@@ -20,8 +20,8 @@ public class SimulatedAnnealing {
     private ArrayList<Location> locationList;
 
     public SimulatedAnnealing(ArrayList<Location> locationList) {
-        this.temperature = 1000.0;
-        this.coolingRate = 0.5;
+        this.temperature = 100.0;
+        this.coolingRate = 1.0;
         this.locationList = locationList;
     }
 
@@ -46,7 +46,9 @@ public class SimulatedAnnealing {
 
 
             //generate a neighbour solution
-            swap(newRoute);
+            for(int i = 0; i < newRoute.getRoute().size()/2; i++)
+                swap(newRoute);
+
             actualSolution = newRoute.cost();
 
 

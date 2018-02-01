@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TSP</string>
+    <string-array name="operation_array">
+        <item>Random</item>
+        <item>Nearest Neighbour</item>
+        <item>Simulated Annealing</item>
+    </string-array>
 </resources>

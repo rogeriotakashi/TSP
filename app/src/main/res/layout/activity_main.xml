@@ -11,61 +11,69 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="rogerio.com.tsp.MainActivity">
 
-    <Button
-        android:text="Optimize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/btnOptimize" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
+        app:srcCompat="@drawable/tap"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/imageView"
-        android:layout_above="@+id/btnOptimize"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/linearLayout" />
 
-    <TextView
-        android:text="Total Distance:"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:weightSum="1">
+
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView" />
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+            <TextView
+                android:text="Total Distance:"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/textView" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtDistance"
-        android:text="0000000000"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDistance"
+                android:text="000000"
+                android:layout_below="@+id/textView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+    </LinearLayout>
+        <Spinner
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/imageView"
+            android:id="@+id/optOptions"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/textView"
+            android:layout_weight="1.17"
+            android:textSize="12pt"/>
 
-    <Button
-        android:text="Nearest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnNearest"
-        android:layout_alignBaseline="@+id/txtDistance"
-        android:layout_alignBottom="@+id/txtDistance"
-        android:layout_toLeftOf="@+id/btnOptimize"
-        android:layout_toStartOf="@+id/btnOptimize" />
+        <Button
+            android:text="Optimize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/btnOptimize" />
 
-    <Button
-        android:text="Random"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnRandom"
-        android:layout_alignBaseline="@+id/btnNearest"
-        android:layout_alignBottom="@+id/btnNearest"
-        android:layout_toRightOf="@+id/textView" />
+    </LinearLayout>
+
 </RelativeLayout>
