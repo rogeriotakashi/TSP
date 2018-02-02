@@ -124,57 +124,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        btnRandom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-                Route route = new Route(locationList);
-                route.getRandomRoute();
-                drawer.drawRoute(route);
-                txtDistance.setText(route.cost()+"");
 
-            }
-        });
-
-        btnOptimize.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-                //Initial Solution
-                NearestNeighbourSearch optimizer = new NearestNeighbourSearch();
-                Route nearest = optimizer.optimize(locationList);
-
-
-                SimulatedAnnealing optimizer2 = new SimulatedAnnealing(nearest.getRoute());
-                Route optimizedRoute = optimizer2.optimize();
-                drawer.drawRoute(optimizedRoute);
-                txtDistance.setText(optimizedRoute.cost()+"");
-            }
-        });
-
-        btnNearest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
-                NearestNeighbourSearchAsyncTask optimizer = new NearestNeighbourSearchAsyncTask(MainActivity.this,txtDistance,drawer);
-                optimizer.execute(locationList);
-            }
-        });
-*/
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

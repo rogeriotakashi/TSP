@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Stack;
 
 import rogerio.com.tsp.Graph.Location;
 import rogerio.com.tsp.Graph.Route;
@@ -20,8 +21,8 @@ public class SimulatedAnnealing {
     private ArrayList<Location> locationList;
 
     public SimulatedAnnealing(ArrayList<Location> locationList) {
-        this.temperature = 100.0;
-        this.coolingRate = 1.0;
+        this.temperature = 200.0;
+        this.coolingRate = 0.003;
         this.locationList = locationList;
     }
 
@@ -33,7 +34,7 @@ public class SimulatedAnnealing {
         double bestSolution;
         double actualSolution;
         Random random = new Random();
-
+        TwoOptSwap twoOptSwap = new TwoOptSwap();
 
 
         while(temperature > 1){
@@ -46,8 +47,7 @@ public class SimulatedAnnealing {
 
 
             //generate a neighbour solution
-            for(int i = 0; i < newRoute.getRoute().size()/2; i++)
-                swap(newRoute);
+            swap(newRoute);
 
             actualSolution = newRoute.cost();
 
@@ -91,6 +91,16 @@ public class SimulatedAnnealing {
         Location temp = route.getLocation(points[0]);
         route.setRoute(points[0],route.getLocation(points[1]));
         route.setRoute(points[1],temp);
+
+        //reverse between i and j
+        Stack<Location> locationStack = new Stack<>();
+        for(int x = points[0]+1; x < points[1] ; x++){
+            locationStack.push(route.getLocation(x));
+        }
+
+        for(int x = points[0]+1; x < points[1] ; x++){
+            route.setRoute(x,locationStack.pop());
+        }
 
 
     }
