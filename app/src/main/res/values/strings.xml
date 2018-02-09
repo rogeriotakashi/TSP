@@ -4,5 +4,6 @@
         <item>Random</item>
         <item>Nearest Neighbour</item>
         <item>Simulated Annealing</item>
+        <item>2 Opt</item>
     </string-array>
 </resources>

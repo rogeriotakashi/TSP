@@ -28,6 +28,7 @@ import rogerio.com.tsp.Graph.Route;
 import rogerio.com.tsp.Optimize.NearestNeighbourSearch;
 import rogerio.com.tsp.Optimize.NearestNeighbourSearchAsyncTask;
 import rogerio.com.tsp.Optimize.SimulatedAnnealing;
+import rogerio.com.tsp.Optimize.TwoOptSwap;
 import rogerio.com.tsp.SavingsHeuristic.SavingsHeuristic;
 
 
@@ -110,6 +111,20 @@ public class MainActivity extends AppCompatActivity {
                                 canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
                                 SimulatedAnnealing optimizer2 = new SimulatedAnnealing(locationList);
                                 Route optimizedRoute = optimizer2.optimize();
+                                drawer.drawRoute(optimizedRoute);
+                                txtDistance.setText(optimizedRoute.cost()+"");
+                            }
+                        });
+                        break;
+                    case "2 Opt":
+                        btnOptimize.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+                                Route route = new Route(locationList);
+                                route.getRandomRoute();
+                                TwoOptSwap optimizer3 = new TwoOptSwap();
+                                Route optimizedRoute = optimizer3.optimize(route);
                                 drawer.drawRoute(optimizedRoute);
                                 txtDistance.setText(optimizedRoute.cost()+"");
                             }
