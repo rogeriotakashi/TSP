@@ -4,7 +4,13 @@ Android app for Traveling Salesman Problem visualization.
 # List of features:  
 - Random Route generator  
 - Nearest Neighbour Search Optimization  
-- Simulated Annealing Optimization (In Progress)  
+- Simulated Annealing Optimization  
+
+# Screenshots:  
+Main Screen: https://imgur.com/lWVoFDe  
+Random Route: https://imgur.com/DAm5bZu  
+Nearest Neighbour: https://imgur.com/SXiwlzc  
+Simulated Annealing: https://imgur.com/sDFQGD1  
 
 # Contacts  
 Developed by Rogério Takashi Hirata  
