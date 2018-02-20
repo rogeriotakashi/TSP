@@ -5,6 +5,7 @@ Android app for Traveling Salesman Problem visualization.
 - Random Route generator  
 - Nearest Neighbour Search Optimization  
 - Simulated Annealing Optimization  
+- 2-Opt Local Search Optimization  
 
 # Screenshots:  
 Main Screen: https://imgur.com/lWVoFDe  
